@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_PROD 100       
+#define MAX_DEP 20         
+#define TAM_NOME 50        
+#define TAM_DEP 300        
+
+char departamentos[MAX_DEP][TAM_DEP];
+int total_departamentos = 0;
+
+
+char nomes[MAX_PROD][TAM_NOME];
+int departamento_produto[MAX_PROD]; 
+int estoques[MAX_PROD];
+float precos[MAX_PROD];
+int total_produtos = 0;
+
 void pausar() {
     printf("\nPressione [ENTER] para continuar...");
     getchar();
@@ -14,126 +29,20 @@ void limpar() {
         system("clear");
     #endif
 }
-#define QP 40
+void exibir_logo() {
+    FILE *arquivo = fopen("logo.txt", "r");
 
-
-// SALGADOS
-
-char tipo [3] = {
-	'S', 'D', 'B'
-};
-
-char produtos[QP][100] = {
-	"COXINHA DE FRANGO",
-	"COXINHA DE CARNE",
-	"COXINHA DE COSTELA",
-	"PASTEL DE QUEIJO",
-	"PASTEL DE CARNE",
-	"PASTEL DE PIZZA",
-	"ESFIRRA DE CARNE",
-	"ESFIRRA DE FRANGO",
-	"ESFIRRA DE QUEIJO",
-	"BOLINHA DE QUEIJO",
-	"SANDUÍCHE NATURAL"
-	
-	
-	"CROISSANT DE LEITE NINHO",
-	"CROISSANT DE NUTELLA",
-	"CROISSANT DE CHOCOLATE",
-	"DONUT DE DOCE DE LEITE",
-	"DONUT DE BRIGADEIRO",
-	"DONUT DE LEITE NINHO",
-	"CUPCAKE DE CENOURA COM CHOCOLATE",
-	"CUPCAKE DE BRIGADEIRO",
-	"CUPCAKE DE MORANGO COM NINHO",
-	"PUDIM DO WAGUINHO",
-	"BOLO DE CHOCOLATE",
-	"BOLO DE BAUNILHA",
-	"BOLO DE MORANGO",
-	"COOKIE DE CHOCOLATE",
-	"COOKIE DE RED VELVET",
-	"COOKIE DE NUTELLA",
-	
-	
-	"CHÁ DE CAMOMILA",
-	"CHÁ CIDREIRA",
-	"CHÁ DE ERVA DOCE",
-	"CAFÉ COM LEITE",
-	"CAFÉ TRADICIONAL",
-	"CAPUCCINO",
-	"COCA COLA",
-	"FANTA LARANJA",
-	"GUARANÁ",
-	"ÁGUA",
-	"SUCO DE LARANJA",
-	"SUCO DE UVA",
-	"SUCO DE MARACUJÁ"
-};
-
-char produtos_tipo[40] = {
-	'S','S','S','S','S','S','S','S','S','S','S',
-	'D','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D',
-    'B','B','B','B','B','B','B','B','B','B','B','B','B',
-};
-
-float precos[QP] = {
-	6.50, 6.50, 7.00,
-	10.00, 10.00, 12.00,
-	6.00, 6.00, 6.00,
-	5.50, 8.50,
-	
-	12.00, 12.00, 9.00,
-	12.00, 12.00, 10.00,
-	8.00, 8.00, 7.67, 8.00,
-	 12.00, 10.00,
-	10.00, 10.00, 12.00,
-	15.00,
-	
-	6.00, 6.00, 6.00,
-	6.00, 5.00, 8.00,
-	5.00, 5.00, 5.00,
-	3.00, 6.00, 6.00,
-	6.00
-};
-
-int estoque[QP] = {
-	50, 50, 50,
-	50, 50, 50,
-	50, 50, 50,
-	50, 50, 
-	
-	50, 50, 50, 50,
-	50, 50, 50, 50,
-	50, 50, 50, 50,
-	50, 50, 50, 50,
-	
-	100, 100, 100,
-	100, 100, 100,
-	100, 100, 100,
-	100, 100, 100,
-	100
-};
-
-float compras[QP] = {
-	0, 0, 0,
-	0, 0, 0,
-	0, 0, 0,
-	0, 0,
-	
-	0, 0, 0, 0,
-	0, 0, 0, 0,
-	0, 0, 0, 0,
-	0, 0, 0, 0,
-	
-	0, 0, 0,
-	0, 0, 0,
-	0, 0, 0,
-	0, 0, 0,
-	0
-};
-
-
-
+    // Caso o arquivo nao exista, gera um padrao inicial automaticamente
+    if (arquivo == NULL) {
+        arquivo = fopen("logo.txt", "w");
+        if (arquivo != NULL) {
+            fprintf(arquivo, "============================================\n");
+            fprintf(arquivo, "       SISTEMA INTEGRADO DE LOJA v3.2       \n");
+            fprintf(arquivo, "============================================\n");
+            fclose(arquivo);
+            arquivo = fopen("logo.txt", "r");
+        }
+    }
 
 
 // MOSTRAR PRODUTOS
