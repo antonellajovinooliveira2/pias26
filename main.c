@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+void pausar() {
+    printf("\nPressione [ENTER] para continuar...");
+    getchar();
+    getchar();
+}
 void limpar() {
     #ifdef _WIN32
         system("cls");
@@ -138,9 +143,10 @@ void mostra_produtos_s() {
 			
 	printf("\n\n ===== SALGADOS =====\n\n");
 
-	for(int i = 0; i < 10; i++) {
+	for(int i = 0; i < 11; i++) {
 
-		printf("%d - %s -- R$ %.2f -- ESTOQUE: %d\n" , i, produtos[i], precos[i], estoque[i], i + 1);
+		printf("%d - %s -- R$ %.2f -- ESTOQUE: %d\n" , i, produtos[i], precos[i], estoque[i], 
+		       i + 1);
 		       		
 		       
 	}
@@ -351,6 +357,7 @@ void menu() {
 		case 1:
 			limpar();
 			mostra_produtos_s();
+			pausar();
 			limpar();
 
 			break;
@@ -359,6 +366,7 @@ void menu() {
 		case 2:
 			limpar();
 			mostra_produtos_d();
+			pausar();
 			limpar();
 			break;
 
@@ -366,6 +374,7 @@ void menu() {
 		case 3:
 			limpar();
 		    mostra_produtos_b();
+		    pausar();
 			limpar();			
 			break;
 
@@ -373,7 +382,8 @@ void menu() {
 		case 4:
 			limpar();
 			mostra_compra();
-			
+			pausar();
+			limpar();
 			break;
 
 
@@ -418,3 +428,4 @@ int main() {
 
 	return 0;
 }
+
